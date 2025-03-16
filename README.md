@@ -1,42 +1,58 @@
-🚀 GoFundMeme Frontend SDK (@gofundmeme/sdk-frontend)
+Here’s the README for **@gofundmeme/sdk-frontend**:
 
-🎉 What is @gofundmeme/sdk-frontend?
+---
 
-The GoFundMeme Frontend SDK is a lightweight version of the GoFundMeme SDK, optimized for frontend applications. It provides seamless integration with Fair Launches, Bonding Curves, Swaps, and Claims, without requiring backend-heavy dependencies.
+# 🚀 GoFundMeme Frontend SDK (`@gofundmeme/sdk-frontend`)
 
-✨ Key Features
+[![Website](https://img.shields.io/badge/Website-GoFundMeme.io-blue?style=for-the-badge)](https://www.gofundmeme.io)  
+[![X (Twitter)](https://img.shields.io/badge/X-@GoFundMemes-black?style=for-the-badge)](https://x.com/GoFundMemes)  
+[![Telegram](https://img.shields.io/badge/Telegram-Join%20Chat-blue?style=for-the-badge)](https://t.me/gofundmeme)  
+[![NPM](https://img.shields.io/npm/v/@gofundmeme/sdk-frontend?color=red&label=NPM&style=for-the-badge)](https://www.npmjs.com/package/@gofundmeme/sdk-frontend)  
 
-✔️ Fetch and interact with Fair Launch Pools
-✔️ Execute Swaps & Claims from Bonding Curve Pools
-✔️ Query Market Data and Pool States
-✔️ Optimized for frontend apps (lighter, faster, and easier to integrate)
+## 🎉 What is `@gofundmeme/sdk-frontend`?
 
-📌 Why Use @gofundmeme/sdk-frontend Instead of @gofundmeme/sdk?
+The **GoFundMeme Frontend SDK** is a lightweight version of the **GoFundMeme SDK**, optimized for frontend applications. It provides seamless integration with **Fair Launches, Bonding Curves, Swaps, and Claims**, without requiring backend-heavy dependencies.
 
-The full @gofundmeme/sdk includes external dependencies like Orca SDK, Raydium SDK, and Meteora SDK, which can cause compatibility issues in frontend applications.
+## ✨ Key Features
 
-✅ Use @gofundmeme/sdk-frontend if:
-	•	You don’t need Harvesting features.
-	•	You only need Pool interactions, Swaps, and Claims.
-	•	You want a lighter, more frontend-friendly package.
+✔️ Fetch and interact with **Fair Launch Pools**  
+✔️ Execute **Swaps & Claims** from Bonding Curve Pools  
+✔️ Query Market Data and Pool States  
+✔️ Optimized for frontend apps (lighter, faster, and easier to integrate)  
 
-🚀 Need full functionality, including Harvesting?
-Use @gofundmeme/sdk on your backend instead.
+---
 
-📦 Installation
+## 📌 Why Use `@gofundmeme/sdk-frontend` Instead of `@gofundmeme/sdk`?
 
-Using npm:
+The full **@gofundmeme/sdk** includes external dependencies like **Orca SDK, Raydium SDK, and Meteora SDK**, which can cause compatibility issues in frontend applications.
 
+✅ Use `@gofundmeme/sdk-frontend` if:  
+- You **don’t need** **Harvesting** features.  
+- You **only need** Pool interactions, Swaps, and Claims.  
+- You want a **lighter, more frontend-friendly package**.  
+
+🚀 Need full functionality, including **Harvesting**?  
+Use **[@gofundmeme/sdk](https://www.npmjs.com/package/@gofundmeme/sdk)** on your backend instead.
+
+---
+
+## 📦 Installation
+
+Using **npm**:  
+```sh
 npm install @gofundmeme/sdk-frontend @solana/web3.js moment decimal.js
-
-Using yarn:
-
+```
+Using **yarn**:  
+```sh
 yarn add @gofundmeme/sdk-frontend @solana/web3.js moment decimal.js
+```
 
-🔧 Quick Start
+---
 
-1️⃣ Initialize the SDK
+## 🔧 Quick Start
 
+### 1️⃣ Initialize the SDK  
+```typescript
 import { Connection } from "@solana/web3.js";
 import { initGoFundMemeSDK } from "@gofundmeme/sdk-frontend";
 
@@ -45,15 +61,17 @@ const connection = new Connection("https://api.mainnet-beta.solana.com");
 (async () => {
   const gfmSDK = await initGoFundMemeSDK({ connection });
 })();
+```
 
-2️⃣ Fetch a Fair Launch Pool
-
+### 2️⃣ Fetch a Fair Launch Pool  
+```typescript
 const mintAddress = "YOUR_TOKEN_MINT";
 const pool = await gfmSDK.pools.fairLaunch.fetchFairLaunchPool({ mintB: mintAddress });
 console.log("Fair Launch Pool:", pool);
+```
 
-3️⃣ Swap Tokens on a Bonding Curve
-
+### 3️⃣ Swap Tokens on a Bonding Curve  
+```typescript
 import { Keypair } from "@solana/web3.js";
 import Decimal from "decimal.js";
 
@@ -68,22 +86,32 @@ const { quote, transaction } = await gfmSDK.pools.bondingCurve.swap.buy({
 // Sign and send transaction
 transaction.sign(payer);
 console.log("Swap Transaction:", transaction);
+```
 
-4️⃣ Subscribe to Pool State Updates
-
+### 4️⃣ Subscribe to Pool State Updates  
+```typescript
 const listener = gfmSDK.api.subscription.poolState.all("mainnet");
 listener.subscription.subscribe(event => {
   console.log("Pool State Update:", event);
 });
+```
 
-📚 Full Documentation
+---
 
-For a complete guide, visit the official GoFundMeme Developer Docs:
-📖 GoFundMeme SDK Documentation
+## 📚 Full Documentation  
 
-💬 Join the Community
+For a complete guide, visit the official **GoFundMeme Developer Docs**:  
+📖 **[GoFundMeme SDK Documentation](https://docs.gofundmeme.io/developers/gfm-for-builders)**  
 
-💙 Follow us on X (Twitter): @GoFundMemes
-💬 Join the Telegram Chat: t.me/gofundmeme
+---
 
-🚀 Happy building with GoFundMeme!
+## 💬 Join the Community  
+
+💙 **Follow us on X (Twitter)**: [@GoFundMemes](https://x.com/GoFundMemes)  
+💬 **Join the Telegram Chat**: [t.me/gofundmeme](https://t.me/gofundmeme)  
+
+🚀 Happy building with GoFundMeme!  
+
+---
+
+This README is clean, structured, and **ready for NPM**! 🚀 Let me know if you need any adjustments.
