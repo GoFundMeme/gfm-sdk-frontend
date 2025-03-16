@@ -111,7 +111,3 @@ For a complete guide, visit the official **GoFundMeme Developer Docs**:
 💬 **Join the Telegram Chat**: [t.me/gofundmeme](https://t.me/gofundmeme)  
 
 🚀 Happy building with GoFundMeme!  
-
----
-
-This README is clean, structured, and **ready for NPM**! 🚀 Let me know if you need any adjustments.
