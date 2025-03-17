@@ -1,4 +1,4 @@
-import { BN, Program } from "@coral-xyz/anchor";
+import type { Program } from "@coral-xyz/anchor";
 import { Connection, PublicKey } from "@solana/web3.js";
 import Decimal from "decimal.js";
 import { SOL_PUBLIC_KEY } from "../constants";
@@ -8,13 +8,16 @@ import {
   getMint,
   Mint,
 } from "@solana/spl-token";
+import BN from "bn.js";
 import { Gofundmeme } from "../IDL";
 
 export const adjustDecimals = (
   amount: number | BN | Decimal,
   decimals: number = 9
 ) => {
-  return new Decimal(amount.toString()).div(new Decimal(10 ** decimals)).toNumber()
+  return new Decimal(amount.toString())
+    .div(new Decimal(10 ** decimals))
+    .toNumber();
 };
 
 export const getDecimals = async ({
