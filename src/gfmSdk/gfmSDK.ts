@@ -1,18 +1,20 @@
-import type { AnchorProvider, Program } from "@coral-xyz/anchor";
+import { Connection, Keypair } from "@solana/web3.js";
+import { AnchorProvider, Wallet as AnchorWallet } from "@coral-xyz/anchor";
+import { getGFMProgram } from "../IDL/getGFMProgram";
 import { builtPoolUtils } from "../accounts/pool";
 import { buildStakingNetworkActions } from "../accounts";
 import { buildApiUtils } from "../apis";
-import { Gofundmeme } from "../IDL";
-import { GFM_PROGRAM } from "../constants";
-import idl from "../IDL/idl/gofundmeme.json";
 
-type InitSDKOptions = (
-  idl: Gofundmeme,
-  programId: string
-) => Program<Gofundmeme>;
-
-export const initGoFundMemeSDK = async (createProgram: InitSDKOptions) => {
-  const gfmProgram = createProgram(idl as Gofundmeme, GFM_PROGRAM.toString());
+export const initGoFundMemeSDK = async ({
+  connection,
+}: {
+  connection: Connection;
+}) => {
+  const keypair = Keypair.generate();
+  const provider = new AnchorProvider(connection, new AnchorWallet(keypair), {
+    commitment: "confirmed",
+  });
+  const gfmProgram = getGFMProgram(provider);
 
   const getStakingNetwork = async () => {
     return await buildStakingNetworkActions({
@@ -20,12 +22,12 @@ export const initGoFundMemeSDK = async (createProgram: InitSDKOptions) => {
     });
   };
 
-  const pools = builtPoolUtils({ gfmProgram });
-  const api = await buildApiUtils(pools, gfmProgram);
+  const pools = await builtPoolUtils({ gfmProgram });
+  const api = await buildApiUtils(pools, gfmProgram)
   return {
     gfmProgram,
     pools,
     getStakingNetwork: getStakingNetwork,
-    api,
+    api
   };
 };

@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2016",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "commonjs",
     "rootDir": "src",
     "outDir": "dist",
     "resolveJsonModule": true,

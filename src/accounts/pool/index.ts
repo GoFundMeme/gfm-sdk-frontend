@@ -1,4 +1,4 @@
-import type { Program } from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
 import { Gofundmeme } from "../../IDL/types/gofundmeme";
 import { PublicKey } from "@solana/web3.js";
 import { getPoolPDA } from "../../utils/pdaUtils";
@@ -39,7 +39,7 @@ export const buildGenericPoolUtils = ({
           pool,
         }),
       };
-    } catch {}
+    } catch { }
     try {
       const pool = await gfmProgram.account.bondingCurvePool.fetch(poolPDA);
       return {
@@ -49,7 +49,7 @@ export const buildGenericPoolUtils = ({
           pool,
         }),
       };
-    } catch {}
+    } catch { }
     throw new Error("No pool found");
   };
 };

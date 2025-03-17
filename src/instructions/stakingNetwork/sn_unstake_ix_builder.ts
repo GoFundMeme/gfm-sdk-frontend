@@ -1,7 +1,8 @@
-import type { Program } from "@coral-xyz/anchor";
+import { BN, Program } from "@coral-xyz/anchor";
 import {
   ComputeBudgetProgram,
   PublicKey,
+  SystemProgram,
   SYSVAR_CLOCK_PUBKEY,
   Transaction,
   TransactionInstruction,

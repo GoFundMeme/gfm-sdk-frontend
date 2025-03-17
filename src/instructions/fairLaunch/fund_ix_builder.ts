@@ -1,4 +1,4 @@
-import type { Program } from "@coral-xyz/anchor";
+import { BN, Program } from "@coral-xyz/anchor";
 import {
   ComputeBudgetProgram,
   LAMPORTS_PER_SOL,
@@ -20,7 +20,7 @@ import {
   getUserPoolsLookupTablePDA,
 } from "../../utils/pdaUtils";
 import { findGatewayTokens } from "@identity.com/solana-gateway-ts";
-import BN from "bn.js";
+import moment from "moment";
 
 export const buildFundPoolTransaction = async ({
   gfmProgram,
@@ -40,10 +40,11 @@ export const buildFundPoolTransaction = async ({
   if (!poolData.poolStatus.raising) {
     throw new Error("Pool raise is completed.");
   }
-  const expirationTime = poolData.expirationTimestamp
-    .mul(new BN(1000))
-    .toNumber();
-  if (expirationTime < Date.now()) {
+  if (
+    moment(poolData.expirationTimestamp.mul(new BN(1000)).toNumber()).isBefore(
+      moment()
+    )
+  ) {
     throw new Error(
       "Campaign deadline has been reached. You can defund your funds if you have a position."
     );

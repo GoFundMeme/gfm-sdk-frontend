@@ -1,4 +1,4 @@
-import type { Program } from "@coral-xyz/anchor";
+import { Program, BN } from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
 import { Gofundmeme } from "../../IDL/types/gofundmeme";
 import { BondingCurvePool, FairLaunchPool } from "../../types";
@@ -9,7 +9,6 @@ import {
   adjustDecimals,
 } from "../../utils";
 import { getMint } from "@solana/spl-token";
-import BN from "bn.js";
 
 export const getPoolStakerAccountInfo = async ({
   staker,

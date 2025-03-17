@@ -1,11 +1,10 @@
-import type { Program } from "@coral-xyz/anchor";
+import { BN, Program } from "@coral-xyz/anchor";
 import {
   ComputeBudgetProgram,
   PublicKey,
   SystemProgram,
   SYSVAR_CLOCK_PUBKEY,
 } from "@solana/web3.js";
-import BN from "bn.js";
 
 import {
   getAssociatedTokenAddressSync,

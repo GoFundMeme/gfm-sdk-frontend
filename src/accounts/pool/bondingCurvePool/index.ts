@@ -1,4 +1,4 @@
-import type { Program } from "@coral-xyz/anchor";
+import { BN, Program } from "@coral-xyz/anchor";
 import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { Gofundmeme } from "../../../IDL/types/gofundmeme";
 import { getPoolPDA } from "../../../utils/pdaUtils";
@@ -7,14 +7,16 @@ import { BondingCurvePool } from "../../../types";
 import { getQuoteForAmount } from "../../../utils/priceUtils";
 import Decimal from "decimal.js";
 import { buildSwapTransaction } from "../../../instructions/bondingCurve/swap_ix_builder";
-import { createHolderUtils, getDecimals, getMintInfo } from "../../../utils";
+import {
+  createHolderUtils,
+  getDecimals,
+  getMintInfo,
+} from "../../../utils";
 import { getPoolStakerAccountInfo } from "../../poolStakerAccount";
 import { buildPoolStakingTransaction } from "../../../instructions/poolStakingNetwork/pool_stake_ix_builder";
 import { buildPoolUnstakingTransaction } from "../../../instructions/poolStakingNetwork/pool_unstake_ix_builder";
 import { buildPoolClaimStakingRewardsTransaction } from "../../../instructions/poolStakingNetwork/pool_staking_claim_ix_builder";
 import { Mint } from "@solana/spl-token";
-import BN from "bn.js";
-
 export const buildBondingCurvePoolUtils = ({
   gfmProgram,
 }: {
@@ -143,6 +145,7 @@ export const buildBondingCurvePoolActions = async ({
     };
   };
 
+
   const fetchStakerAccount = function (payload: { staker: PublicKey }) {
     return getPoolStakerAccountInfo({
       gfmProgram,
@@ -188,19 +191,13 @@ export const buildBondingCurvePoolActions = async ({
   });
 
   const getMarketcapInSol = async (refreshPool?: boolean) => {
-    if (refreshPool) await refreshPoolData();
-    return pool.totalRaised
-      .mul(pool.totalSupply)
-      .div(pool.tokenBalance)
-      .div(new BN(LAMPORTS_PER_SOL))
-      .toNumber();
-  };
+    if (refreshPool)
+      await refreshPoolData()
+    return pool.totalRaised.mul(pool.totalSupply).div(pool.tokenBalance).div(new BN(LAMPORTS_PER_SOL)).toNumber()
+  }
   const getVitualPricePerToken = async (refreshPool?: boolean) => {
-    return (
-      (await getMarketcapInSol(refreshPool)) /
-      pool.totalSupply.div(new BN(10 ** mintB.decimals)).toNumber()
-    );
-  };
+    return (await getMarketcapInSol(refreshPool)) / pool.totalSupply.div(new BN(10 ** mintB.decimals)).toNumber()
+  }
 
   return {
     mintA,
@@ -214,8 +211,8 @@ export const buildBondingCurvePoolActions = async ({
       },
       marketUtils: {
         getVitualPricePerToken: getVitualPricePerToken,
-        getMarketCapInSol: getMarketcapInSol,
-      },
+        getMarketCapInSol: getMarketcapInSol
+      }
     },
     actions: {
       swap: {

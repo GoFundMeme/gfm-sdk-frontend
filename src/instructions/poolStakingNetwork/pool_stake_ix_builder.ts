@@ -1,4 +1,4 @@
-import type { Program } from "@coral-xyz/anchor";
+import { BN, Program } from "@coral-xyz/anchor";
 import { ComputeBudgetProgram, PublicKey } from "@solana/web3.js";
 import {
   getAssociatedTokenAddressSync,
@@ -6,7 +6,10 @@ import {
   getMint,
   ASSOCIATED_TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import { SYSVAR_CLOCK_PUBKEY, SystemProgram } from "@solana/web3.js";
+import {
+  SYSVAR_CLOCK_PUBKEY,
+  SystemProgram
+} from "@solana/web3.js";
 import { BondingCurvePool, FairLaunchPool } from "../../types";
 import { Gofundmeme } from "../../IDL/types/gofundmeme";
 import {
@@ -14,7 +17,6 @@ import {
   getPoolStakingNetwork,
   getPoolStakerAccount,
 } from "../../utils";
-import BN from "bn.js";
 
 export const buildPoolStakingTransaction = async ({
   gfmProgram,
