@@ -4,21 +4,24 @@
   "version": "1.0.3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "serve": "rm -rf dist && tsc && node dist/index.js"
   },
   "dependencies": {
-    "@coral-xyz/anchor": "0.29.0",
     "@identity.com/solana-gateway-ts": "^0.12.0",
     "@solana/spl-token": "^0.4.13",
-    "@solana/web3.js": "^1.98.0",
-    "axios": "^1.7.9",
     "decimal.js": "^10.5.0",
-    "moment": "^2.30.1",
+    "bn.js": "^5.2.1",
     "rxjs": "^7.8.2",
     "ws": "^8.18.1"
+  },
+  "peerDependencies": {
+    "@coral-xyz/anchor": "0.29.0",
+    "@solana/web3.js": "^1.98.0",
+    "axios": "^1.8.3"
   },
   "devDependencies": {
     "@types/node": "^22.13.4",
@@ -36,6 +39,5 @@
     "package"
   ],
   "author": "WorkProb",
-  "license": "MIT",
-  "packageManager": "yarn@3.2.3+sha512.f26f951f67de0c6a33ee381e5ff364709c87e70eb5e65c694e4facde3512f1fa80b8679e6ba31ce7d340fbb46f08dd683af9457e240f25a204be7427940d767e"
+  "license": "MIT"
 }

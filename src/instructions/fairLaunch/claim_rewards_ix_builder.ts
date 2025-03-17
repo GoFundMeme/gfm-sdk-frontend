@@ -1,4 +1,4 @@
-import { Program } from "@coral-xyz/anchor";
+import type { Program } from "@coral-xyz/anchor";
 import {
   ComputeBudgetProgram,
   PublicKey,
@@ -33,7 +33,7 @@ export const buildClaimRewardsTransaction = async ({
   const instructions: TransactionInstruction[] = [
     ComputeBudgetProgram.setComputeUnitLimit({
       units: 1_000_000,
-    })
+    }),
   ];
 
   const addTokenAccountInstruction = async (

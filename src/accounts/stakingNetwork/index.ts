@@ -1,5 +1,5 @@
 export * from "./utils";
-import { Program } from "@coral-xyz/anchor";
+import type { Program } from "@coral-xyz/anchor";
 import { Gofundmeme } from "../../IDL/types/gofundmeme";
 import { StakingNetworkState } from "../../types";
 import { getStakerStakeRecords, getStakingNetworkState } from "./utils";

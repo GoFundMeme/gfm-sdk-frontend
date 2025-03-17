@@ -1,4 +1,4 @@
-import { Program } from "@coral-xyz/anchor";
+import type { Program } from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
 import { Gofundmeme } from "../../../IDL/types/gofundmeme";
 import { getPoolPDA } from "../../../utils/pdaUtils";
@@ -129,7 +129,6 @@ export const buildFairLaunchPoolActions = async ({
     mintB,
     gfmProgram,
   });
-
 
   return {
     mintA,

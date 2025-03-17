@@ -7,7 +7,7 @@ Here’s the README for **@gofundmeme/sdk-frontend**:
 [![Website](https://img.shields.io/badge/Website-GoFundMeme.io-blue?style=for-the-badge)](https://www.gofundmeme.io)  
 [![X (Twitter)](https://img.shields.io/badge/X-@GoFundMemes-black?style=for-the-badge)](https://x.com/GoFundMemes)  
 [![Telegram](https://img.shields.io/badge/Telegram-Join%20Chat-blue?style=for-the-badge)](https://t.me/gofundmeme)  
-[![NPM](https://img.shields.io/npm/v/@gofundmeme/sdk-frontend?color=red&label=NPM&style=for-the-badge)](https://www.npmjs.com/package/@gofundmeme/sdk-frontend)  
+[![NPM](https://img.shields.io/npm/v/@gofundmeme/sdk-frontend?color=red&label=NPM&style=for-the-badge)](https://www.npmjs.com/package/@gofundmeme/sdk-frontend)
 
 ## 🎉 What is `@gofundmeme/sdk-frontend`?
 
@@ -18,7 +18,7 @@ The **GoFundMeme Frontend SDK** is a lightweight version of the **GoFundMeme SDK
 ✔️ Fetch and interact with **Fair Launch Pools**  
 ✔️ Execute **Swaps & Claims** from Bonding Curve Pools  
 ✔️ Query Market Data and Pool States  
-✔️ Optimized for frontend apps (lighter, faster, and easier to integrate)  
+✔️ Optimized for frontend apps (lighter, faster, and easier to integrate)
 
 ---
 
@@ -26,10 +26,11 @@ The **GoFundMeme Frontend SDK** is a lightweight version of the **GoFundMeme SDK
 
 The full **@gofundmeme/sdk** includes external dependencies like **Orca SDK, Raydium SDK, and Meteora SDK**, which can cause compatibility issues in frontend applications.
 
-✅ Use `@gofundmeme/sdk-frontend` if:  
-- You **don’t need** **Harvesting** features.  
-- You **only need** Pool interactions, Swaps, and Claims.  
-- You want a **lighter, more frontend-friendly package**.  
+✅ Use `@gofundmeme/sdk-frontend` if:
+
+- You **don’t need** **Harvesting** features.
+- You **only need** Pool interactions, Swaps, and Claims.
+- You want a **lighter, more frontend-friendly package**.
 
 🚀 Need full functionality, including **Harvesting**?  
 Use **[@gofundmeme/sdk](https://www.npmjs.com/package/@gofundmeme/sdk)** on your backend instead.
@@ -38,39 +39,47 @@ Use **[@gofundmeme/sdk](https://www.npmjs.com/package/@gofundmeme/sdk)** on your
 
 ## 📦 Installation
 
-Using **npm**:  
+Using **npm**:
+
 ```sh
-npm install @gofundmeme/sdk-frontend @solana/web3.js moment decimal.js
+npm install @gofundmeme/sdk-frontend @coral-xyz/anchor @solana/web3.js axios
 ```
-Using **yarn**:  
+
+Using **yarn**:
+
 ```sh
-yarn add @gofundmeme/sdk-frontend @solana/web3.js moment decimal.js
+yarn add @gofundmeme/sdk-frontend @coral-xyz/anchor @solana/web3.js axios
 ```
 
 ---
 
 ## 🔧 Quick Start
 
-### 1️⃣ Initialize the SDK  
+### 1️⃣ Initialize the SDK
+
 ```typescript
-import { Connection } from "@solana/web3.js";
+import { Program } from "@coral-xyz/anchor";
 import { initGoFundMemeSDK } from "@gofundmeme/sdk-frontend";
 
-const connection = new Connection("https://api.mainnet-beta.solana.com");
-
 (async () => {
-  const gfmSDK = await initGoFundMemeSDK({ connection });
+  const gfmSDK = await initGoFundMemeSDK(
+    (idl, programId) => new Program(idl, programId, anchorProvider)
+  );
 })();
 ```
 
-### 2️⃣ Fetch a Fair Launch Pool  
+### 2️⃣ Fetch a Fair Launch Pool
+
 ```typescript
 const mintAddress = "YOUR_TOKEN_MINT";
-const pool = await gfmSDK.pools.fairLaunch.fetchFairLaunchPool({ mintB: mintAddress });
+const pool = await gfmSDK.pools.fairLaunch.fetchFairLaunchPool({
+  mintB: mintAddress,
+});
 console.log("Fair Launch Pool:", pool);
 ```
 
-### 3️⃣ Swap Tokens on a Bonding Curve  
+### 3️⃣ Swap Tokens on a Bonding Curve
+
 ```typescript
 import { Keypair } from "@solana/web3.js";
 import Decimal from "decimal.js";
@@ -88,26 +97,27 @@ transaction.sign(payer);
 console.log("Swap Transaction:", transaction);
 ```
 
-### 4️⃣ Subscribe to Pool State Updates  
+### 4️⃣ Subscribe to Pool State Updates
+
 ```typescript
 const listener = gfmSDK.api.subscription.poolState.all("mainnet");
-listener.subscription.subscribe(event => {
+listener.subscription.subscribe((event) => {
   console.log("Pool State Update:", event);
 });
 ```
 
 ---
 
-## 📚 Full Documentation  
+## 📚 Full Documentation
 
 For a complete guide, visit the official **GoFundMeme Developer Docs**:  
-📖 **[GoFundMeme SDK Documentation](https://docs.gofundmeme.io/developers/gfm-for-builders)**  
+📖 **[GoFundMeme SDK Documentation](https://docs.gofundmeme.io/developers/gfm-for-builders)**
 
 ---
 
-## 💬 Join the Community  
+## 💬 Join the Community
 
 💙 **Follow us on X (Twitter)**: [@GoFundMemes](https://x.com/GoFundMemes)  
-💬 **Join the Telegram Chat**: [t.me/gofundmeme](https://t.me/gofundmeme)  
+💬 **Join the Telegram Chat**: [t.me/gofundmeme](https://t.me/gofundmeme)
 
-🚀 Happy building with GoFundMeme!  
+🚀 Happy building with GoFundMeme!
